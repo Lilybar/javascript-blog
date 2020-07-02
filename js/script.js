@@ -7,7 +7,7 @@
     event.preventDefault();
     const clickedElement = this;
     console.log('Link was clicked!');
-    const articleSelector = "href";
+    const articleSelector = href
 
 
   /* [DONE] remove class 'active' from all article links  */
@@ -34,7 +34,7 @@
   
     /* [IN PROGRESS] get 'href' attribute from the clicked link */
 
-    var div1 = element.getAttribute("href");
+    var a = clickedElement.getAttribute("href");
     console.log('href:', articleSelector);
   
     /* find the correct article using the selector (value of 'href' attribute) */
