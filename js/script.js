@@ -9,7 +9,6 @@ const titleClickHandler = function(event){
   console.log('Link was clicked!');
   // const articleSelector = href;//
 
-
   /* [DONE] remove class 'active' from all article links  */
 
   const activeLinks = document.querySelectorAll('.titles a.active');
@@ -73,7 +72,7 @@ function generateTitleLinks(){
     console.log(articleTitle);
 
     /* create HTML of the link */
-    const linkHTML = '<li><a href="' + articleId + '"><span>' + articleTitle + '</span></a></li>';
+    const linkHTML = '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>';
     console.log(linkHTML);
     /* insert link into titleList */
     html = html + linkHTML;
@@ -90,7 +89,5 @@ function generateTitleLinks(){
   }
 
 }
- 
-
 
 generateTitleLinks();
