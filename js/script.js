@@ -51,25 +51,26 @@
 
     function generateTitleLinks(){
     /* remove contents of titleList */
+        
         const titleList = document.querySelector(optTitleListSelector);
+        titleList.innerHTML = '';
         console.log(titleList);
-
-        function clearMessages(){
-            titleList.innerHTML = '';
-        }
+        
     /* for each article */
+        const articles = document.querySelectorAll(optArticleSelector);
+        for(let article of articles){
+            /* get the article id */
+            const articleId = article.getAttribute("id");
+            /* find the title element */
+            
+            /* get the title from the title element */
 
-    /* get the article id */
+            /* create HTML of the link */
 
-    /* find the title element */
-
-    /* get the title from the title element */
-
-    /* create HTML of the link */
-
-    /* insert link into titleList */
-
-    }
+            /* insert link into titleList */
+        }
+        articles();
+    }  
 
     generateTitleLinks();
 
