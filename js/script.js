@@ -1,8 +1,3 @@
- /* document.getElementById('test-button').addEventListener('click', function(){
-    const links = document.querySelectorAll('.titles a');
-    console.log('links:', links);
-  }); */
-
 const titleClickHandler = function(event){
   event.preventDefault();
   const clickedElement = this;
@@ -28,12 +23,12 @@ const titleClickHandler = function(event){
   const activeArticles = document.querySelectorAll('.posts article.active');
 
   for(let activeArticle of activeArticles){
-      activeArticle.classList.remove('active');
+    activeArticle.classList.remove('active');
   }
 
   /* [IN PROGRESS] get 'href' attribute from the clicked link */
 
-  const articleSelector = clickedElement.getAttribute("href");
+  const articleSelector = clickedElement.getAttribute('href');
   console.log('href:', articleSelector);
 
   /* find the correct article using the selector (value of 'href' attribute) */
@@ -44,11 +39,11 @@ const titleClickHandler = function(event){
 
   article.classList.add('active');
   
-}
+};
 
 /* 6.4 */
 
-  const optArticleSelector = '.post',
+const optArticleSelector = '.post',
   optTitleSelector = '.post-title',
   optTitleListSelector = '.titles';
 
@@ -65,7 +60,7 @@ function generateTitleLinks(){
 
   for(let article of articles){
     /* get the article id */
-    const articleId = article.getAttribute("id");
+    const articleId = article.getAttribute('id');
     /* find the title element */
     /* get the title from the title element */
     const articleTitle = article.querySelector(optTitleSelector).innerHTML;
