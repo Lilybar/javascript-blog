@@ -46,8 +46,9 @@ const optArticleSelector = '.post',
   optTitleListSelector = '.titles',
   optArticleTagsSelector = '.post-tags .list',
   optArticleAuthorSelector = '.post .post-author',
-  optTagsListSelector = '.tags .list',
-  optCloudClassCount = '5',
+  optTagsListSelector = '.tags.list',
+  optAuthorsListSelector = '.authors.list',
+  optCloudClassCount = 5,
   optCloudClassPrefix = 'tag-size-';
 
 function generateTitleLinks(customSelector = ''){
@@ -103,12 +104,12 @@ const calculateTagsParams = function (tags) {
   return params;
 };
 
-const calculateTagClass = function (count, params) {
-  const classNumber = Math.floor ( (( count - params.min) / (params.max - params.min)) * optCloudClassCount + 1 );
+function calculateTagClass(count, params) {
+  const classNumber = Math.floor ( (( count - params.min) / (params.max - params.min)) * (optCloudClassCount -1) + 1 );
   const tagClass = optCloudClassPrefix + classNumber;
-  console.log(tagClass);
-
-};
+  console.log(tagClass); 
+  return classNumber;
+}
 
 
 function generateTags(){
@@ -155,7 +156,7 @@ function generateTags(){
   /* [NEW] START LOOP: for each tag in allTags: */
   for(let tag in allTags){
     /* [NEW] generate code of a link and add it to allTagsHTML */
-    const tagLinkHTML = '<li><a class="" href="#tag-' + tag + '">' + tag + '</a>' + ' (' + calculateTagClass(allTags[tag], tagsParams) + ') </li>';
+    const tagLinkHTML = '<li><a class="tag-class-' + calculateTagClass(allTags[tag], tagsParams) + '" href="#tag-' + tag + '">' + tag + '</a>' + ' (' + calculateTagClass(allTags[tag], tagsParams) + ') </li> ';
     console.log('tagLinkHTML:', tagLinkHTML); 
     allTagsHTML += tagLinkHTML;
     /* '<li><a class="" href="#tag-' + tag + '">' + tag + '</a>' + ' (' + allTags[tag] + ') </li>'; */
@@ -213,8 +214,31 @@ function addClickListenersToTags(){
 
 addClickListenersToTags();
 
+const calculateAuthorParams = function (authors) {
+  const params = {min: 999999, max: 0};
+  for(let author in authors){
+    console.log(author + ' is used ' + authors[authors] + ' times');
+    if(authors[author] > params.max){
+      params.max = authors[author];
+    }
+    if(authors[author] < params.max) {
+      params.min = authors[author];
+    }
+  }
+  return params;
+};
+
+function calculateAuthorClass(count, params) {
+  const classNumber = Math.floor ( (( count - params.min) / (params.max - params.min)) * (optCloudClassCount -1) + 1 );
+  const authorClass = optCloudClassPrefix + classNumber;
+  console.log(authorClass); 
+  return classNumber;
+}
+
 function generateAuthors(){
-/* find all articles */
+  /* [NEW] create a new variable allTags with an empty array */
+  let allAuthors = {};
+  /* find all articles */
   const articles = document.querySelectorAll(optArticleSelector);
   /* START LOOP: for every article: */
   for (let article of articles) {
@@ -229,11 +253,35 @@ function generateAuthors(){
     const linkHTML = 'by ' + '<a href="#author-' + articleAuthors + '">' + articleAuthors + '</a>';
     /* add generated code to html variable */
     html = html + linkHTML;
+    /* [NEW] check if this link is NOT already in allTags */
+    if(!allAuthors[articleAuthors]) {
+      /* [NEW] add tag to allTags object */
+      allAuthors[articleAuthors] = 1;
+    } else {
+      allAuthors[articleAuthors]++;
+    }
     /* insert HTML of all the links into the tags wrapper */
     authorsWrapper.innerHTML = html;
   /* END LOOP: for every article: */
   }
+  /* [NEW] find list of tags in right column */
+  const authorList = document.querySelector('.authors');
+  const authorParams = calculateAuthorParams(allAuthors);
+  console.log('tagsParams:', authorParams);
+  /* [NEW] create variable for all links HTML code */
+  let allAuthorsHTML = '';
+  /* [NEW] START LOOP: for each tag in allTags: */
+  for(let author in allAuthors){
+    /* [NEW] generate code of a link and add it to allTagsHTML */
+    const authorLinkHTML = '<li><a class="tag-class-' + calculateAuthorClass(allAuthors[author], authorParams) + '" href="#author-' + author + '">' + author + '</a>' + ' (' + calculateTagClass(allAuthors[author], authorParams) + ') </li> ';
+    allAuthorsHTML += authorLinkHTML;
+  }
+  /* [NEW] END LOOP: for each tag in allTags: */
+
+  /*[NEW] add HTML from allTagsHTML to tagList */
+  authorList.innerHTML = allAuthorsHTML;
 }
+
 generateAuthors();
 
 function authorClickHandler(event){
