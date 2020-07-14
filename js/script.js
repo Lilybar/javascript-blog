@@ -217,7 +217,7 @@ addClickListenersToTags();
 const calculateAuthorParams = function (authors) {
   const params = {min: 999999, max: 0};
   for(let author in authors){
-    console.log(author + ' is used ' + authors[authors] + ' times');
+    console.log(author + ' is used ' + authors[author] + ' times');
     if(authors[author] > params.max){
       params.max = authors[author];
     }
@@ -229,8 +229,9 @@ const calculateAuthorParams = function (authors) {
 };
 
 function calculateAuthorClass(count, params) {
-  const classNumber = Math.floor ( (( count - params.min) / (params.max - params.min)) * (optCloudClassCount -1) + 1 );
+  const classNumber = Math.floor ( (( count - params.min) / (params.max - params.min)) * (optCloudClassCount - 1) + 1 );
   const authorClass = optCloudClassPrefix + classNumber;
+  console.log(classNumber);
   console.log(authorClass); 
   return authorClass;
 }
