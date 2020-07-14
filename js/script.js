@@ -108,7 +108,7 @@ function calculateTagClass(count, params) {
   const classNumber = Math.floor ( (( count - params.min) / (params.max - params.min)) * (optCloudClassCount -1) + 1 );
   const tagClass = optCloudClassPrefix + classNumber;
   console.log(tagClass); 
-  return classNumber;
+  return tagClass;
 }
 
 
@@ -156,7 +156,7 @@ function generateTags(){
   /* [NEW] START LOOP: for each tag in allTags: */
   for(let tag in allTags){
     /* [NEW] generate code of a link and add it to allTagsHTML */
-    const tagLinkHTML = '<li><a class="tag-class-' + calculateTagClass(allTags[tag], tagsParams) + '" href="#tag-' + tag + '">' + tag + '</a>' + ' (' + calculateTagClass(allTags[tag], tagsParams) + ') </li> ';
+    const tagLinkHTML = '<li><a class="' + calculateTagClass(allTags[tag], tagsParams) + '" href="#tag-' + tag + '">' + tag + '</a>' + ' (' + allTags[tag] + ') </li> ';
     console.log('tagLinkHTML:', tagLinkHTML); 
     allTagsHTML += tagLinkHTML;
     /* '<li><a class="" href="#tag-' + tag + '">' + tag + '</a>' + ' (' + allTags[tag] + ') </li>'; */
@@ -232,7 +232,7 @@ function calculateAuthorClass(count, params) {
   const classNumber = Math.floor ( (( count - params.min) / (params.max - params.min)) * (optCloudClassCount -1) + 1 );
   const authorClass = optCloudClassPrefix + classNumber;
   console.log(authorClass); 
-  return classNumber;
+  return authorClass;
 }
 
 function generateAuthors(){
@@ -273,7 +273,7 @@ function generateAuthors(){
   /* [NEW] START LOOP: for each tag in allTags: */
   for(let author in allAuthors){
     /* [NEW] generate code of a link and add it to allTagsHTML */
-    const authorLinkHTML = '<li><a class="tag-class-' + calculateAuthorClass(allAuthors[author], authorParams) + '" href="#author-' + author + '">' + author + '</a>' + ' (' + calculateTagClass(allAuthors[author], authorParams) + ') </li> ';
+    const authorLinkHTML = '<li><a class="' + calculateAuthorClass(allAuthors[author], authorParams) + '" href="#author-' + author + '">' + author + '</a>' + ' (' + allAuthors[author] + ') </li> ';
     allAuthorsHTML += authorLinkHTML;
   }
   /* [NEW] END LOOP: for each tag in allTags: */
