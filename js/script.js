@@ -103,7 +103,12 @@ const calculateTagsParams = function (tags) {
   return params;
 };
 
-const calculateTagClass = function (count, params) {};
+const calculateTagClass = function (count, params) {
+  const classNumber = Math.floor ( (( count - params.min) / (params.max - params.min)) * optCloudClassCount + 1 );
+  const tagClass = optCloudClassPrefix + classNumber;
+  console.log(tagClass);
+
+};
 
 
 function generateTags(){
@@ -144,7 +149,7 @@ function generateTags(){
   /* [NEW] find list of tags in right column */
   const tagList = document.querySelector('.tags');
   const tagsParams = calculateTagsParams(allTags);
-  console.log('tagsParams:', tagsParams)
+  console.log('tagsParams:', tagsParams);
   /* [NEW] create variable for all links HTML code */
   let allTagsHTML = '';
   /* [NEW] START LOOP: for each tag in allTags: */
