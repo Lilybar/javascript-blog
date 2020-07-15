@@ -202,8 +202,11 @@
       </script>
       <script id="templates-tagCloudLink" type="text/x-handlebars-template">
         {{#each tags}}
-        <li><a href="#tag- {{ tag }} class="{{ className }}>{{ tag }}</a> ({{ count }})</li>
+        <li><a href="#tag-{{ tag }}" class="{{ className }}">{{ tag }}</a> ({{ count }})</li>
         {{/each}}
+      </script>
+      <script id="templates-authorCloudLink" type="text/x-handlebars-template">
+        <li><a href="#author-{{ author }}" class="{{ className }}">{{ author }}</a> ({{ count }})</li>
       </script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.0/handlebars.min.js"></script>
       <script src="js/script.js"></script>
